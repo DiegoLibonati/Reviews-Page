@@ -33,7 +33,7 @@ I made a web page that allows you to see different reviews, this web application
 
 ## Portfolio Link
 
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Reviews%20page`
+`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Reviews%20Page`
 
 ## Video
 
