@@ -23,18 +23,6 @@ I made a web page that allows you to see different reviews, this web application
 2. CSS3
 3. HTML5
 
-## Galery
-
-![Reviews-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/Javascript/Imagenes/reviews-0.jpg)
-
-![Reviews-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/Javascript/Imagenes/reviews-1.jpg)
-
-![Reviews-page](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/Javascript/Imagenes/reviews-2.jpg)
-
-## Portfolio Link
-
-`https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Reviews%20Page`
-
 ## Video
 
 https://user-images.githubusercontent.com/99032604/198900258-9df2ce62-3eae-460e-a989-59d825eb5a27.mp4
