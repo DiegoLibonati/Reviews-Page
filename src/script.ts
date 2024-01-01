@@ -1,25 +1,25 @@
-const nombrePersona = document.getElementById("nombre");
-const cargoPersona = document.getElementById("cargo");
-const textoPersona = document.getElementById("texto");
-const imagenPersona = document.getElementById("foto");
+const nombrePersona = document.getElementById("nombre") as HTMLHeadingElement;
+const cargoPersona = document.getElementById("cargo") as HTMLParagraphElement;
+const textoPersona = document.getElementById("texto") as HTMLParagraphElement;
+const imagenPersona = document.getElementById("foto") as HTMLImageElement;
 
-const btnNext = document.getElementById("btnnext");
-const btnPrev = document.getElementById("btnprev");
-const btnRandom = document.getElementById("btnrandom");
+const btnNext = document.getElementById("btnnext") as HTMLButtonElement;
+const btnPrev = document.getElementById("btnprev") as HTMLButtonElement;
+const btnRandom = document.getElementById("btnrandom") as HTMLButtonElement;
 
 class Reviews {
-  constructor(imagen, nombre, cargo, texto) {
-    this.imagen = imagen;
-    this.nombre = nombre;
-    this.cargo = cargo;
-    this.texto = texto;
-  }
+  constructor(
+    public imagen: string,
+    public nombre: string,
+    public cargo: string,
+    public texto: string
+  ) {}
 
-  changeP() {
+  changeP(): void {
     imagenPersona.src = `${this.imagen}`;
   }
 
-  insertar() {
+  insertar(): void {
     nombrePersona.innerHTML = this.nombre;
     cargoPersona.innerHTML = this.cargo;
     textoPersona.innerHTML = this.texto;
@@ -47,7 +47,7 @@ const review3 = new Reviews(
 
 const reviews = [review1, review2, review3];
 
-let positionReview = 0;
+let positionReview: number = 0;
 
 reviews[positionReview].insertar();
 reviews[positionReview].changeP();

@@ -13,13 +13,20 @@
 2. Join to the correct path of the clone
 3. Open index.html in your favorite navigator
 
+---
+
+1. Clone the repository
+2. Join to the correct path of the clone
+3. Execute: `yarn install`
+4. Execute: `yarn dev`
+
 ## Description
 
 I made a web page that allows you to see different reviews, this web application allowed me to learn how to make this kind of reviews/slides with next, prev and with a `Surprise Me` button that basically looks for a random review to show. In this case you see an image, the name, the role and a brief description. I use POO to build this.
 
 ## Technologies used
 
-1. Javascript (POO)
+1. Typescript (POO)
 2. CSS3
 3. HTML5
 
@@ -32,36 +39,36 @@ https://user-images.githubusercontent.com/99032604/198900258-9df2ce62-3eae-460e-
 Here we get all the elements that are going to be updated with dynamic information from the html:
 
 ```
-const nombrePersona = document.getElementById("nombre");
-const cargoPersona = document.getElementById("cargo");
-const textoPersona = document.getElementById("texto");
-const imagenPersona = document.getElementById("foto");
+const nombrePersona = document.getElementById("nombre") as HTMLHeadingElement;
+const cargoPersona = document.getElementById("cargo") as HTMLParagraphElement;
+const textoPersona = document.getElementById("texto") as HTMLParagraphElement;
+const imagenPersona = document.getElementById("foto") as HTMLImageElement;
 ```
 
 Here we get all the buttons that can be used, i.e. the `next` button to go to the next review, the `prev` button to go to the last review and the `surprise` button to go to a random review:
 
 ```
-const btnNext = document.getElementById("btnnext");
-const btnPrev = document.getElementById("btnprev");
-const btnRandom = document.getElementById("btnrandom");
+const btnNext = document.getElementById("btnnext") as HTMLButtonElement;
+const btnPrev = document.getElementById("btnprev") as HTMLButtonElement;
+const btnRandom = document.getElementById("btnrandom") as HTMLButtonElement;
 ```
 
 Here create the class `Reviews`, this class will have as attributes: image, name, title and text. Also it will have 2 methods which are: `changeP` which will change the image and `insert` which basically will change the name, the position and the text of the review:
 
 ```
 class Reviews {
-  constructor(imagen, nombre, cargo, texto) {
-    this.imagen = imagen;
-    this.nombre = nombre;
-    this.cargo = cargo;
-    this.texto = texto;
-  }
+  constructor(
+    public imagen: string,
+    public nombre: string,
+    public cargo: string,
+    public texto: string
+  ) {}
 
-  changeP() {
+  changeP(): void {
     imagenPersona.src = `${this.imagen}`;
   }
 
-  insertar() {
+  insertar(): void {
     nombrePersona.innerHTML = this.nombre;
     cargoPersona.innerHTML = this.cargo;
     textoPersona.innerHTML = this.texto;
