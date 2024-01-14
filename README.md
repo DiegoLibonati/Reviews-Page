@@ -39,10 +39,14 @@ https://user-images.githubusercontent.com/99032604/198900258-9df2ce62-3eae-460e-
 Here we get all the elements that are going to be updated with dynamic information from the html:
 
 ```
-const nombrePersona = document.getElementById("nombre") as HTMLHeadingElement;
-const cargoPersona = document.getElementById("cargo") as HTMLParagraphElement;
-const textoPersona = document.getElementById("texto") as HTMLParagraphElement;
-const imagenPersona = document.getElementById("foto") as HTMLImageElement;
+const reviewName = document.getElementById("name") as HTMLHeadingElement;
+const reviewPosition = document.getElementById(
+  "position"
+) as HTMLParagraphElement;
+const reviewDescriptino = document.getElementById(
+  "description"
+) as HTMLParagraphElement;
+const reviewImage = document.getElementById("image") as HTMLImageElement;
 ```
 
 Here we get all the buttons that can be used, i.e. the `next` button to go to the next review, the `prev` button to go to the last review and the `surprise` button to go to a random review:
@@ -53,33 +57,54 @@ const btnPrev = document.getElementById("btnprev") as HTMLButtonElement;
 const btnRandom = document.getElementById("btnrandom") as HTMLButtonElement;
 ```
 
-Here create the class `Reviews`, this class will have as attributes: image, name, title and text. Also it will have 2 methods which are: `changeP` which will change the image and `insert` which basically will change the name, the position and the text of the review:
+This class `Reviews` receives as attributes an array of reviews and an index to know in which review it is currently. It also has different methods such as add all reviews, add a review, go to the next review, go to the previous review and select a random review:
 
 ```
-class Reviews {
-  constructor(
-    public imagen: string,
-    public nombre: string,
-    public cargo: string,
-    public texto: string
-  ) {}
+import { Review } from "./Review";
 
-  changeP(): void {
-    imagenPersona.src = `${this.imagen}`;
+export class Reviews {
+  constructor(public reviews: Review[], public indexReview: number) {}
+
+  addReview(review: Review): void {
+    this.reviews.push(review);
+    return;
   }
 
-  insertar(): void {
-    nombrePersona.innerHTML = this.nombre;
-    cargoPersona.innerHTML = this.cargo;
-    textoPersona.innerHTML = this.texto;
+  addReviews(reviews: Review[]): void {
+    this.reviews = reviews;
+    return;
+  }
+
+  nextReview(): void {
+    if (this.indexReview >= this.reviews.length - 1) {
+      this.indexReview = 0;
+      return;
+    }
+    this.indexReview += 1;
+    return;
+  }
+
+  prevReview(): void {
+    if (this.indexReview <= 0) {
+      this.indexReview = this.reviews.length - 1;
+      return;
+    }
+    this.indexReview -= 1;
+    return;
+  }
+
+  setRandomIndex(): void {
+    const randomPosition = Math.floor(Math.random() * this.reviews.length);
+    this.indexReview = randomPosition;
+    return;
   }
 }
 ```
 
-An example of how to create an object thanks to the `Reviews` class:
+An example of how to create an object thanks to the `Review` class:
 
 ```
-const review1 = new Reviews(
+const review1 = new Review(
   "Image",
   "Name",
   "Rol",
@@ -90,16 +115,18 @@ const review1 = new Reviews(
 After having created all the reviews, we add them to an array and then we can manage this array, using the indices:
 
 ```
-const reviews = [review1, review2, review3];
+reviews.addReviews([review1, review2, review3]);
 ```
 
 At this moment we configure to show the review with index 0. That is to say, we execute the class methods for the review with index 0 of the `reviews` array:
 
 ```
-let positionReview = 0;
-
-reviews[positionReview].insertar();
-reviews[positionReview].changeP();
+reviews.reviews[reviews.indexReview].setContent(
+  reviewName,
+  reviewPosition,
+  reviewDescriptino,
+  reviewImage
+);
 ```
 
 The `next` button and the `prev` button will be assigned an event which is when they are clicked and each will execute a different function:
@@ -117,38 +144,39 @@ btnPrev.addEventListener("click", () => {
 These are the functions that will be executed depending on whether `next` or `prev` is played. In both cases it is set first if the index exists, if it exists it will subtract or add to the global index and/or if it does not exist it sets a default value:
 
 ```
-function pasarRew() {
-  if (positionReview >= reviews.length - 1) {
-    positionReview = 0;
-    reviews[positionReview].insertar();
-    reviews[positionReview].changeP();
-  } else {
-    positionReview += 1;
-    reviews[positionReview].insertar();
-    reviews[positionReview].changeP();
-  }
-}
+const nextReview = (): void => {
+  reviews.nextReview();
+  reviews.reviews[reviews.indexReview].setContent(
+    reviewName,
+    reviewPosition,
+    reviewDescriptino,
+    reviewImage
+  );
+  return;
+};
 
-function prevRew() {
-  if (positionReview <= 0) {
-    positionReview = reviews.length - 1;
-    reviews[positionReview].insertar();
-    reviews[positionReview].changeP();
-  } else {
-    positionReview -= 1;
-    reviews[positionReview].insertar();
-    reviews[positionReview].changeP();
-  }
-}
+const prevReview = (): void => {
+  reviews.prevReview();
+  reviews.reviews[reviews.indexReview].setContent(
+    reviewName,
+    reviewPosition,
+    reviewDescriptino,
+    reviewImage
+  );
+  return;
+};
 ```
 
 The `surprise` button basically when clicked, will select an existing index at random and execute the methods with the review found in that index in the `reviews` array:
 
 ```
 btnRandom.addEventListener("click", () => {
-  const randomPosition = Math.floor(Math.random() * reviews.length);
-  reviews[randomPosition].insertar();
-  reviews[randomPosition].changeP();
+  reviews.setRandomIndex();
+  reviews.reviews[reviews.indexReview].setContent(
+    reviewName,
+    reviewPosition,
+    reviewDescriptino,
+    reviewImage
+  );
 });
-
 ```

@@ -7,27 +7,81 @@
     <title>Reviews page</title>
 
     <link rel="stylesheet" type="text/css" href="./src/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <main>
-      <section class="contenedor">
-        <h1>Our Reviews</h1>
+    <main class="w-screen h-screen bg-[#128CF0]">
+      <section
+        class="flex items-center justify-center w-full h-full contenedor"
+      >
+        <article
+          class="flex flex-col w-full items-center h-[95%] bg-[#118DEF] p-2 m-6 shadow-sm md:flex-row md:h-[50%] md:w-[95%] md:p-8 lg:h-[65%] lg:w-[85%] xl:w-[70%] 2xl:w-[65%] contenedor_div"
+        >
+          <div
+            class="flex items-center justify-center w-full relative md:w-[60%]"
+          >
+            <div
+              class="relative flex items-center justify-center flex-col p-4 h-auto w-full max-w-[21.875rem] shadow-md bg-[#ECEFF1] z-[2]"
+            >
+              <img
+                src=""
+                class="w-full h-64 shadow-sm object-cover mb-2"
+                id="image"
+              />
+              <h2 class="text-base font-bold uppercase mb-2" id="name"></h2>
+              <p class="text-xs mb-2" class="contenedor_cargo" id="position"></p>
+            </div>
 
-        <article class="contenedor_div">
-          <img src="" id="foto" />
-          <h2 id="nombre"></h2>
-          <p class="contenedor_cargo" id="cargo"></p>
-          <p class="contenedor_texto" id="texto"></p>
-
-          <div class="contenedor_botones">
-            <button id="btnprev">Prev</button>
-            <button id="btnnext">Next</button>
+            <div
+              class="absolute bg-[#E7CA46] w-40 rounded-lg h-[24rem] z-[1] -top-4"
+            ></div>
           </div>
-          <button id="btnrandom">Surprise Me</button>
+
+          <div
+            class="flex flex-col mt-6 h-full justify-between md:w-[40%] md:m-0 md:h-[55%] xl:h-[65%] 2xl:h-[50%]"
+          >
+            <div class="flex flex-col mb-2">
+              <h2
+                class="text-[#F3FFFF] text-lg font-bold md:text-2xl lg:text-3xl xl:text-4xl"
+              >
+                Client Reviews
+              </h2>
+              <p
+                class="text-xs text-[#F3FFFF] text-justify xl:text-sm contenedor_texto"
+                id="description"
+              ></p>
+            </div>
+
+            <div class="flex flex-row w-full justify-around">
+              <div class="flex flex-row contenedor_botones">
+                <button
+                  class="flex items-center justify-center cursor-pointer text-[#F3FFFF]"
+                  id="btnprev"
+                >
+                  <i class="material-icons text-3xl">chevron_left</i>
+                </button>
+                <button
+                  class="flex items-center justify-center cursor-pointer text-[#F3FFFF]"
+                  id="btnnext"
+                >
+                  <i class="material-icons text-3xl">chevron_right</i>
+                </button>
+              </div>
+              <button
+                class="text-[#F3FFFF] border-2 rounded-md p-1"
+                id="btnrandom"
+              >
+                Surprise Me
+              </button>
+            </div>
+          </div>
         </article>
       </section>
     </main>
 
-    <script src="./src/script.ts"></script>
+    <script type="module" src="./src/script.ts"></script>
   </body>
 </html>
