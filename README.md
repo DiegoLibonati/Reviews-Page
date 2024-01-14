@@ -32,7 +32,7 @@ I made a web page that allows you to see different reviews, this web application
 
 ## Video
 
-https://user-images.githubusercontent.com/99032604/198900258-9df2ce62-3eae-460e-a989-59d825eb5a27.mp4
+https://github.com/DiegoLibonati/Reviews-Page/assets/99032604/6fd3ffaa-1835-4042-8b37-6798b734c19c
 
 ## Documentation
 
