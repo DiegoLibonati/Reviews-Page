@@ -1,4 +1,4 @@
-# Reviews-Page
+# Reviews Page
 
 ## Getting Started
 
@@ -32,7 +32,7 @@ I made a web page that allows you to see different reviews, this web application
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/97`](https://www.diegolibonati.com.ar/#/project/97)
+[`https://www.diegolibonati.com.ar/#/project/Reviews-Page`](https://www.diegolibonati.com.ar/#/project/Reviews-Page)
 
 ## Video
 
