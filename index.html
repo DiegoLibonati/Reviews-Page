@@ -30,9 +30,14 @@
                 src=""
                 class="w-full h-64 shadow-sm object-cover mb-2"
                 id="image"
+                alt="review"
               />
               <h2 class="text-base font-bold uppercase mb-2" id="name"></h2>
-              <p class="text-xs mb-2" class="contenedor_cargo" id="position"></p>
+              <p
+                class="text-xs mb-2"
+                class="contenedor_cargo"
+                id="position"
+              ></p>
             </div>
 
             <div
@@ -60,12 +65,14 @@
                 <button
                   class="flex items-center justify-center cursor-pointer text-[#F3FFFF]"
                   id="btnprev"
+                  aria-label="btn prev review"
                 >
                   <i class="material-icons text-3xl">chevron_left</i>
                 </button>
                 <button
                   class="flex items-center justify-center cursor-pointer text-[#F3FFFF]"
                   id="btnnext"
+                  aria-label="btn next review"
                 >
                   <i class="material-icons text-3xl">chevron_right</i>
                 </button>
@@ -73,6 +80,7 @@
               <button
                 class="text-[#F3FFFF] border-2 rounded-md p-1"
                 id="btnrandom"
+                aria-label="btn random review"
               >
                 Surprise Me
               </button>
@@ -82,6 +90,6 @@
       </section>
     </main>
 
-    <script type="module" src="./src/script.ts"></script>
+    <script type="module" src="./src/index.ts"></script>
   </body>
 </html>
