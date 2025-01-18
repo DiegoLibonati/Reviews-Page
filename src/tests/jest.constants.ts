@@ -1,6 +1,9 @@
-import { Review } from "../../models/Review";
+import fs from "fs";
+import path from "path";
 
-export const REVIEWS_MOCK = [
+import { Review } from "../models/Review";
+
+export const mockReviews = [
   new Review(
     "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80",
     "Susan Smith",
@@ -20,3 +23,12 @@ export const REVIEWS_MOCK = [
     "Air plant deep v polaroid church-key. Farm-to-table ramps put a bird on it pickled aesthetic pork belly beard tbh street art pabst. Pop-up cliche before they sold out hoodie heirloom flannel schlitz organic. Crucifix forage cardigan before they sold out umami echo park subway tile art party squid shoreditch photo booth."
   ),
 ];
+
+const INITIAL_HTML: string = fs.readFileSync(
+  path.resolve(__dirname, "../../index.html"),
+  "utf8"
+);
+
+export const OFFICIAL_BODY = INITIAL_HTML.match(
+  /<body[^>]*>([\s\S]*?)<\/body>/i
+)![1];

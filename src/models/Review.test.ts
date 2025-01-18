@@ -2,30 +2,30 @@ import { Review } from "./Review";
 
 import { getElements } from "../helpers/getElements";
 
-import { OFFICIAL_BODY } from "../tests/jest.setup";
-
-const REVIEW = {
-  image: "image",
-  name: "name",
-  position: "position",
-  description: "description",
-};
-
-beforeEach(() => {
-  document.body.innerHTML = OFFICIAL_BODY;
-});
-
-afterEach(() => {
-  document.body.innerHTML = "";
-});
+import { OFFICIAL_BODY } from "../tests/jest.constants";
 
 describe("Review Class", () => {
+  const REVIEW = {
+    image: "image",
+    name: "name",
+    position: "position",
+    description: "description",
+  };
+
   let review: Review = new Review(
     REVIEW.image,
     REVIEW.name,
     REVIEW.position,
     REVIEW.description
   );
+
+  beforeEach(() => {
+    document.body.innerHTML = OFFICIAL_BODY;
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = "";
+  });
 
   test("It must have the correct initial state when initializing an instance of review.", () => {
     expect(review.image).toBe(REVIEW.image);
