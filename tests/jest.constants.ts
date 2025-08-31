@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-import { Review } from "../models/Review";
+import { Review } from "../src/models/Review";
 
 export const mockReviews = [
   new Review(
@@ -25,7 +25,7 @@ export const mockReviews = [
 ];
 
 const INITIAL_HTML: string = fs.readFileSync(
-  path.resolve(__dirname, "../../index.html"),
+  path.resolve(__dirname, "../index.html"),
   "utf8"
 );
 
