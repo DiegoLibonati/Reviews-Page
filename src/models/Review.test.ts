@@ -1,8 +1,8 @@
 import { Review } from "./Review";
 
-import { getElements } from "../helpers/getElements";
+import { getElements } from "@src/helpers/getElements";
 
-import { OFFICIAL_BODY } from "../../tests/jest.constants";
+import { OFFICIAL_BODY } from "@tests/jest.constants";
 
 describe("Review Class", () => {
   const REVIEW = {

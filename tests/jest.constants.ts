@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-import { Review } from "../src/models/Review";
+import { Review } from "@src/models/Review";
 
 export const mockReviews = [
   new Review(

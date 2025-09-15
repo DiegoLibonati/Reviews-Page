@@ -1,8 +1,8 @@
-import { Review } from "./models/Review";
+import { Review } from "@src/models/Review";
 
-import { getElements } from "./helpers/getElements";
+import { getElements } from "@src/helpers/getElements";
 
-import { reviews } from "./constants/reviewsData";
+import { reviews } from "@src/constants/reviewsData";
 
 let currentReview: Review;
 

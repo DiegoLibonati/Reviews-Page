@@ -1,4 +1,4 @@
-import { Review } from "../models/Review";
+import { Review } from "@src/models/Review";
 
 export const reviews = [
   new Review(

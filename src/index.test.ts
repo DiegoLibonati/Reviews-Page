@@ -1,9 +1,9 @@
 import { screen } from "@testing-library/dom";
 import user from "@testing-library/user-event";
 
-import { OFFICIAL_BODY, mockReviews } from "../tests/jest.constants";
+import { OFFICIAL_BODY, mockReviews } from "@tests/jest.constants";
 
-jest.mock("./constants/reviewsData.ts", () => ({
+jest.mock("@src/constants/reviewsData.ts", () => ({
   get reviews() {
     return mockReviews;
   },
