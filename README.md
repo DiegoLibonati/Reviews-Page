@@ -22,6 +22,7 @@ I made a web page that allows you to see different reviews, this web application
 1. Typescript (POO)
 2. CSS3
 3. HTML5
+4. Vite
 
 ## Libraries used
 
