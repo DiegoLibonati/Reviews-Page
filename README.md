@@ -15,14 +15,15 @@ The main goal is to explore and demonstrate best practices, patterns, and techno
 
 ## Description
 
-I made a web page that allows you to see different reviews, this web application allowed me to learn how to make this kind of reviews/slides with next, prev and with a `Surprise Me` button that basically looks for a random review to show. In this case you see an image, the name, the role and a brief description. I use POO to build this.
+I made a web page that allows you to see different reviews, this web application allowed me to learn how to make this kind of reviews/slides with next, prev and with a `Surprise Me` button that basically looks for a random review to show. In this case you see an image, the name, the role and a brief description.
 
 ## Technologies used
 
-1. Typescript (POO)
-2. CSS3
-3. HTML5
-4. Vite
+1. Typescript
+2. TailwindCSS
+3. CSS3
+4. HTML5
+5. Vite
 
 ## Libraries used
 
