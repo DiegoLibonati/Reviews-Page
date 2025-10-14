@@ -20,7 +20,7 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-describe("ReviewPage", () => {
+describe("ReviewPage.ts", () => {
   beforeEach(() => {
     reviewStore.setReviews(mockReviews);
     reviewStore.setCurrentReview(mockReviews[0]);

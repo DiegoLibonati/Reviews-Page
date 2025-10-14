@@ -15,7 +15,7 @@ const renderComponent = (
   ariaLabel: string,
   children?: string,
   className?: string,
-  onClick?: () => void
+  onClick?: jest.Mock
 ): RenderComponent => {
   const props: ButtonActionProps = {
     id: id,
@@ -41,7 +41,7 @@ const renderComponent = (
   };
 };
 
-describe("ButtonAction", () => {
+describe("ButtonAction.ts", () => {
   afterEach(() => {
     document.body.innerHTML = "";
   });

@@ -42,7 +42,7 @@ const renderComponent = (
   };
 };
 
-describe("Review", () => {
+describe("Review.ts", () => {
   beforeEach(() => {
     reviewStore.setReviews(mockReviews);
     reviewStore.setCurrentReview(mockReviews[0]);
