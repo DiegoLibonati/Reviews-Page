@@ -1,7 +1,7 @@
 import { ReviewState } from "@src/entities/states";
 import { Review } from "@src/entities/app";
 
-import { Store } from "@src/stores/store";
+import { Store } from "@src/core/store";
 
 import reviews from "@src/constants/reviews";
 
