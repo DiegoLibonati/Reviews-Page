@@ -210,9 +210,10 @@ describe("Review.ts", () => {
         "Position"
       );
 
-      const prevButton = container.querySelector("#btnprev");
-      const nextButton = container.querySelector("#btnnext");
-      const randomButton = container.querySelector("#btnrandom");
+      const prevButton = container.querySelector<HTMLButtonElement>("#btnprev");
+      const nextButton = container.querySelector<HTMLButtonElement>("#btnnext");
+      const randomButton =
+        container.querySelector<HTMLButtonElement>("#btnrandom");
 
       expect(prevButton).toBeInTheDocument();
       expect(nextButton).toBeInTheDocument();
@@ -241,11 +242,15 @@ describe("Review.ts", () => {
         "Position"
       );
 
-      const prevButton = container.querySelector("#btnprev");
-      const nextButton = container.querySelector("#btnnext");
+      const prevButton = container.querySelector<HTMLButtonElement>("#btnprev");
+      const nextButton = container.querySelector<HTMLButtonElement>("#btnnext");
 
-      expect(prevButton?.querySelector(".material-icons")).toBeInTheDocument();
-      expect(nextButton?.querySelector(".material-icons")).toBeInTheDocument();
+      expect(
+        prevButton?.querySelector<HTMLElement>(".material-icons")
+      ).toBeInTheDocument();
+      expect(
+        nextButton?.querySelector<HTMLElement>(".material-icons")
+      ).toBeInTheDocument();
     });
   });
 
@@ -429,7 +434,8 @@ describe("Review.ts", () => {
         "Position"
       );
 
-      const reviewActions = container.querySelector(".review__actions");
+      const reviewActions =
+        container.querySelector<HTMLDivElement>(".review__actions");
       expect(reviewActions).toBeInTheDocument();
     });
 
@@ -441,7 +447,7 @@ describe("Review.ts", () => {
         "Position"
       );
 
-      const reviewActionArrows = container.querySelector(
+      const reviewActionArrows = container.querySelector<HTMLDivElement>(
         ".review__actions-arrows"
       );
       expect(reviewActionArrows).toBeInTheDocument();
@@ -455,11 +461,13 @@ describe("Review.ts", () => {
         "Position"
       );
 
-      const reviewActionArrows = container.querySelector(
+      const reviewActionArrows = container.querySelector<HTMLDivElement>(
         ".review__actions-arrows"
       );
-      const prevButton = reviewActionArrows?.querySelector("#btnprev");
-      const nextButton = reviewActionArrows?.querySelector("#btnnext");
+      const prevButton =
+        reviewActionArrows?.querySelector<HTMLButtonElement>("#btnprev");
+      const nextButton =
+        reviewActionArrows?.querySelector<HTMLButtonElement>("#btnnext");
 
       expect(prevButton).toBeInTheDocument();
       expect(nextButton).toBeInTheDocument();
@@ -473,8 +481,10 @@ describe("Review.ts", () => {
         "Position"
       );
 
-      const reviewActions = container.querySelector(".review__actions");
-      const randomButton = reviewActions?.querySelector("#btnrandom");
+      const reviewActions =
+        container.querySelector<HTMLDivElement>(".review__actions");
+      const randomButton =
+        reviewActions?.querySelector<HTMLButtonElement>("#btnrandom");
 
       expect(randomButton).toBeInTheDocument();
     });

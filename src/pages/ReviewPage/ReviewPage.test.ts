@@ -49,7 +49,7 @@ describe("ReviewPage.ts", () => {
     test("It should render section with review-wrapper class", () => {
       const { container } = renderComponent();
 
-      const section = container.querySelector("section");
+      const section = container.querySelector<HTMLElement>("section");
       expect(section).toBeInTheDocument();
       expect(section?.classList.contains("review-wrapper")).toBe(true);
     });
@@ -57,7 +57,7 @@ describe("ReviewPage.ts", () => {
     test("It should have centered layout classes on section", () => {
       const { container } = renderComponent();
 
-      const section = container.querySelector("section");
+      const section = container.querySelector<HTMLElement>("section");
       expect(section?.className).toContain("flex");
       expect(section?.className).toContain("items-center");
       expect(section?.className).toContain("justify-center");
@@ -68,7 +68,7 @@ describe("ReviewPage.ts", () => {
     test("It should render initial review from store", () => {
       renderComponent();
 
-      const reviewElement = document.querySelector(".review");
+      const reviewElement = document.querySelector<HTMLDivElement>(".review");
       expect(reviewElement).toBeInTheDocument();
     });
 
@@ -94,8 +94,9 @@ describe("ReviewPage.ts", () => {
     test("It should render review inside review-wrapper", () => {
       const { container } = renderComponent();
 
-      const reviewWrapper = container.querySelector(".review-wrapper");
-      const review = reviewWrapper?.querySelector(".review");
+      const reviewWrapper =
+        container.querySelector<HTMLElement>(".review-wrapper");
+      const review = reviewWrapper?.querySelector<HTMLDivElement>(".review");
 
       expect(review).toBeInTheDocument();
     });
@@ -170,7 +171,7 @@ describe("ReviewPage.ts", () => {
       });
       await user.click(surpriseButton);
 
-      const reviewElement = document.querySelector(".review");
+      const reviewElement = document.querySelector<HTMLDivElement>(".review");
       expect(reviewElement).toBeInTheDocument();
 
       mathRandomSpy.mockRestore();
@@ -210,8 +211,10 @@ describe("ReviewPage.ts", () => {
       await user.click(nextButton);
       await user.click(nextButton);
 
-      const reviewWrapper = container.querySelector(".review-wrapper");
-      const reviews = reviewWrapper?.querySelectorAll(".review");
+      const reviewWrapper =
+        container.querySelector<HTMLElement>(".review-wrapper");
+      const reviews =
+        reviewWrapper?.querySelectorAll<HTMLDivElement>(".review");
 
       expect(reviews?.length).toBe(1);
     });
@@ -313,10 +316,12 @@ describe("ReviewPage.ts", () => {
     test("It should render review with all required elements", () => {
       renderComponent();
 
-      const image = document.querySelector("#image");
-      const name = document.querySelector("#name");
-      const position = document.querySelector("#position");
-      const description = document.querySelector("#description");
+      const image = document.querySelector<HTMLImageElement>("#image");
+      const name = document.querySelector<HTMLHeadingElement>("#name");
+      const position =
+        document.querySelector<HTMLParagraphElement>("#position");
+      const description =
+        document.querySelector<HTMLParagraphElement>("#description");
 
       expect(image).toBeInTheDocument();
       expect(name).toBeInTheDocument();
@@ -332,7 +337,7 @@ describe("ReviewPage.ts", () => {
 
       renderComponent();
 
-      const reviewElement = document.querySelector(".review");
+      const reviewElement = document.querySelector<HTMLDivElement>(".review");
       expect(reviewElement).toBeInTheDocument();
     });
 
@@ -347,7 +352,8 @@ describe("ReviewPage.ts", () => {
       await user.click(nextButton);
       await user.click(nextButton);
 
-      const reviewWrapper = container.querySelector(".review-wrapper");
+      const reviewWrapper =
+        container.querySelector<HTMLElement>(".review-wrapper");
       expect(reviewWrapper).toBeInTheDocument();
       expect(reviewWrapper?.classList.contains("review-wrapper")).toBe(true);
     });
@@ -360,7 +366,7 @@ describe("ReviewPage.ts", () => {
       });
       await user.click(nextButton);
 
-      const reviews = document.querySelectorAll(".review");
+      const reviews = document.querySelectorAll<HTMLDivElement>(".review");
       expect(reviews.length).toBe(1);
     });
 
@@ -377,7 +383,7 @@ describe("ReviewPage.ts", () => {
       await user.click(nextButton);
       await user.click(nextButton);
 
-      const reviewElement = document.querySelector(".review");
+      const reviewElement = document.querySelector<HTMLDivElement>(".review");
       expect(reviewElement).toBeInTheDocument();
     });
   });
@@ -399,7 +405,7 @@ describe("ReviewPage.ts", () => {
     test("It should center content in section", () => {
       const { container } = renderComponent();
 
-      const section = container.querySelector("section");
+      const section = container.querySelector<HTMLElement>("section");
       expect(section?.className).toContain("items-center");
       expect(section?.className).toContain("justify-center");
     });
@@ -407,7 +413,7 @@ describe("ReviewPage.ts", () => {
     test("It should have full width and height section", () => {
       const { container } = renderComponent();
 
-      const section = container.querySelector("section");
+      const section = container.querySelector<HTMLElement>("section");
       expect(section?.className).toContain("w-full");
       expect(section?.className).toContain("h-full");
     });
@@ -443,14 +449,17 @@ describe("ReviewPage.ts", () => {
       const { container } = renderComponent();
 
       expect(container.tagName).toBe("MAIN");
-      expect(container.querySelector("section")).toBeInTheDocument();
+      expect(
+        container.querySelector<HTMLElement>("section")
+      ).toBeInTheDocument();
     });
   });
 
   describe("Performance and memory", () => {
     test("It should replace children efficiently without memory leaks", async () => {
       const { container } = renderComponent();
-      const reviewWrapper = container.querySelector(".review-wrapper");
+      const reviewWrapper =
+        container.querySelector<HTMLElement>(".review-wrapper");
 
       const nextButton = screen.getByRole("button", {
         name: /btn next review/i,
@@ -473,7 +482,7 @@ describe("ReviewPage.ts", () => {
       reviewStore.setCurrentReview(mockReviews[2]);
       reviewStore.setCurrentReview(mockReviews[0]);
 
-      const reviews = document.querySelectorAll(".review");
+      const reviews = document.querySelectorAll<HTMLDivElement>(".review");
       expect(reviews.length).toBe(1);
     });
   });

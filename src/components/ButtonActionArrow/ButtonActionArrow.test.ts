@@ -201,8 +201,8 @@ describe("ButtonActionArrow.ts", () => {
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>';
       const { container } = renderComponent("svg-arrow", "Next", svgArrow);
 
-      expect(container.querySelector("svg")).toBeInTheDocument();
-      expect(container.querySelector("path")).toBeInTheDocument();
+      expect(container.querySelector<HTMLElement>("svg")).toBeInTheDocument();
+      expect(container.querySelector<HTMLElement>("path")).toBeInTheDocument();
     });
 
     test("It should render icon with text content correctly", () => {
@@ -214,7 +214,9 @@ describe("ButtonActionArrow.ts", () => {
       );
 
       expect(container.innerHTML).toBe(iconContent);
-      expect(container.querySelector(".icon")).toBeInTheDocument();
+      expect(
+        container.querySelector<HTMLSpanElement>(".icon")
+      ).toBeInTheDocument();
     });
   });
 
@@ -297,8 +299,12 @@ describe("ButtonActionArrow.ts", () => {
         name: /complex arrow navigation/i,
       });
 
-      expect(button.querySelector(".arrow-wrapper")).toBeInTheDocument();
-      expect(button.querySelector(".arrow-icon")).toBeInTheDocument();
+      expect(
+        button.querySelector<HTMLDivElement>(".arrow-wrapper")
+      ).toBeInTheDocument();
+      expect(
+        button.querySelector<HTMLSpanElement>(".arrow-icon")
+      ).toBeInTheDocument();
     });
 
     test("It should handle unicode arrows correctly", () => {
