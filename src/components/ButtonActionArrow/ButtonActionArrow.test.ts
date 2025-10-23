@@ -6,7 +6,7 @@ import { ButtonActionArrowProps } from "@src/entities/props";
 import { ButtonActionArrow } from "@src/components/ButtonActionArrow/ButtonActionArrow";
 
 type RenderComponent = {
-  props: ButtonActionArrowProps;
+  props: { onClick: jest.Mock } & ButtonActionArrowProps;
   container: HTMLButtonElement;
 };
 
@@ -17,7 +17,7 @@ const renderComponent = (
   className?: string,
   onClick?: jest.Mock
 ): RenderComponent => {
-  const props: ButtonActionArrowProps = {
+  const props = {
     id: id,
     ariaLabel: ariaLabel,
     children: children,
@@ -181,11 +181,7 @@ describe("ButtonActionArrow.ts", () => {
 
   describe("Content rendering", () => {
     test("It should render arrow text content correctly", () => {
-      const { container } = renderComponent(
-        "left-arrow",
-        "Navigate back",
-        "←"
-      );
+      const { container } = renderComponent("left-arrow", "Navigate back", "←");
 
       expect(container.innerHTML).toBe("←");
     });
@@ -203,11 +199,7 @@ describe("ButtonActionArrow.ts", () => {
     test("It should render SVG arrow content correctly", () => {
       const svgArrow =
         '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>';
-      const { container } = renderComponent(
-        "svg-arrow",
-        "Next",
-        svgArrow
-      );
+      const { container } = renderComponent("svg-arrow", "Next", svgArrow);
 
       expect(container.querySelector("svg")).toBeInTheDocument();
       expect(container.querySelector("path")).toBeInTheDocument();
@@ -228,11 +220,7 @@ describe("ButtonActionArrow.ts", () => {
 
   describe("Flexbox layout verification", () => {
     test("It should center content with flex properties", () => {
-      const { container } = renderComponent(
-        "centered-arrow",
-        "Navigate",
-        "→"
-      );
+      const { container } = renderComponent("centered-arrow", "Navigate", "→");
 
       const computedStyle = window.getComputedStyle(container);
       expect(container.className).toContain("flex");

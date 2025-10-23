@@ -6,7 +6,7 @@ import { ButtonActionProps } from "@src/entities/props";
 import { ButtonAction } from "@src/components/ButtonAction/ButtonAction";
 
 type RenderComponent = {
-  props: ButtonActionProps;
+  props: { onClick: jest.Mock } & ButtonActionProps;
   container: HTMLButtonElement;
 };
 
@@ -17,7 +17,7 @@ const renderComponent = (
   className?: string,
   onClick?: jest.Mock
 ): RenderComponent => {
-  const props: ButtonActionProps = {
+  const props = {
     id: id,
     ariaLabel: ariaLabel,
     children: children,
@@ -213,11 +213,7 @@ describe("ButtonAction.ts", () => {
 
   describe("Edge cases", () => {
     test("It should handle empty string as children", () => {
-      const { container } = renderComponent(
-        "empty-button",
-        "Empty button",
-        ""
-      );
+      const { container } = renderComponent("empty-button", "Empty button", "");
 
       expect(container.innerHTML).toBe("");
     });
@@ -248,8 +244,7 @@ describe("ButtonAction.ts", () => {
 
     test("It should maintain button functionality with complex content", () => {
       const mockOnClick = jest.fn();
-      const complexContent =
-        '<div><span>Icon</span><span>Label</span></div>';
+      const complexContent = "<div><span>Icon</span><span>Label</span></div>";
       renderComponent(
         "complex-button",
         "Complex button",
