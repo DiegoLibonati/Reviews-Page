@@ -7,7 +7,7 @@ import { ReviewPage } from "@/pages/ReviewPage/ReviewPage";
 
 import { reviewStore } from "@/stores/reviewStore";
 
-import reviews from "@/constants/reviews";
+import { mockReview, mockReview2 } from "@tests/__mocks__/reviews.mock";
 
 const renderPage = (): Page => {
   const container = ReviewPage();
@@ -17,12 +17,12 @@ const renderPage = (): Page => {
 
 describe("ReviewPage", () => {
   beforeEach(() => {
-    reviewStore.setCurrentReview(reviews[0]!);
+    reviewStore.setCurrentReview(mockReview);
   });
 
   afterEach(() => {
     document.body.innerHTML = "";
-    reviewStore.setCurrentReview(reviews[0]!);
+    reviewStore.setCurrentReview(mockReview);
   });
 
   it("should render the page with correct structure", () => {
@@ -42,8 +42,8 @@ describe("ReviewPage", () => {
   it("should render initial review data", () => {
     renderPage();
 
-    expect(screen.getByText(reviews[0]!.name)).toBeInTheDocument();
-    expect(screen.getByText(reviews[0]!.position)).toBeInTheDocument();
+    expect(screen.getByText(mockReview.name)).toBeInTheDocument();
+    expect(screen.getByText(mockReview.position)).toBeInTheDocument();
   });
 
   it("should update review when next button is clicked", async () => {
@@ -59,13 +59,13 @@ describe("ReviewPage", () => {
 
   it("should update review when prev button is clicked", async () => {
     const user = userEvent.setup();
-    reviewStore.setCurrentReview(reviews[1]!);
+    reviewStore.setCurrentReview(mockReview2);
     renderPage();
 
     const prevButton = screen.getByRole("button", { name: "btn prev review" });
     await user.click(prevButton);
 
-    expect(screen.getByText(reviews[0]!.name)).toBeInTheDocument();
+    expect(screen.getByText(mockReview.name)).toBeInTheDocument();
   });
 
   it("should cleanup review component and subscription on page cleanup", () => {

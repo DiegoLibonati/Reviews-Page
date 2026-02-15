@@ -8,7 +8,11 @@ import { Review } from "@/components/Review/Review";
 
 import { reviewStore } from "@/stores/reviewStore";
 
-import reviews from "@/constants/reviews";
+import {
+  mockReview,
+  mockReview2,
+  mockReviews,
+} from "@tests/__mocks__/reviews.mock";
 
 const renderComponent = (props: ReviewProps): ReviewComponent => {
   const container = Review(props);
@@ -18,12 +22,12 @@ const renderComponent = (props: ReviewProps): ReviewComponent => {
 
 describe("Review Component", () => {
   beforeEach(() => {
-    reviewStore.setCurrentReview(reviews[0]!);
+    reviewStore.setCurrentReview(mockReview);
   });
 
   afterEach(() => {
     document.body.innerHTML = "";
-    reviewStore.setCurrentReview(reviews[0]!);
+    reviewStore.setCurrentReview(mockReview);
   });
 
   const defaultProps: ReviewProps = {
@@ -96,19 +100,19 @@ describe("Review Component", () => {
     await user.click(nextButton);
 
     const currentReview = reviewStore.get("currentReview");
-    expect(currentReview).not.toEqual(reviews[0]);
+    expect(currentReview).not.toEqual(mockReview);
   });
 
   it("should navigate to previous review when prev button is clicked", async () => {
     const user = userEvent.setup();
-    reviewStore.setCurrentReview(reviews[1]!);
+    reviewStore.setCurrentReview(mockReview2);
     renderComponent(defaultProps);
 
     const prevButton = screen.getByRole("button", { name: "btn prev review" });
     await user.click(prevButton);
 
     const currentReview = reviewStore.get("currentReview");
-    expect(currentReview).toEqual(reviews[0]);
+    expect(currentReview).toEqual(mockReview);
   });
 
   it("should set random review when surprise me button is clicked", async () => {
@@ -121,7 +125,7 @@ describe("Review Component", () => {
     await user.click(randomButton);
 
     const currentReview = reviewStore.get("currentReview");
-    expect(reviews).toContainEqual(currentReview);
+    expect(mockReviews).toContainEqual(currentReview);
   });
 
   it("should cleanup all button listeners", () => {

@@ -1,26 +1,30 @@
 import { ReviewStore } from "@/stores/reviewStore";
 
-import reviews from "@/constants/reviews";
+import {
+  mockReview,
+  mockReview2,
+  mockReviews,
+} from "@tests/__mocks__/reviews.mock";
 
 describe("ReviewStore", () => {
   let store: ReviewStore;
 
   beforeEach(() => {
     store = new ReviewStore({
-      reviews: reviews,
-      currentReview: reviews[0]!,
+      reviews: mockReviews,
+      currentReview: mockReview,
     });
   });
 
   it("should initialize with first review", () => {
     const state = store.getState();
 
-    expect(state.reviews).toEqual(reviews);
-    expect(state.currentReview).toEqual(reviews[0]);
+    expect(state.reviews).toEqual(mockReviews);
+    expect(state.currentReview).toEqual(mockReview);
   });
 
   it("should set current review", () => {
-    const secondReview = reviews[1]!;
+    const secondReview = mockReview2;
 
     store.setCurrentReview(secondReview);
 
@@ -31,8 +35,8 @@ describe("ReviewStore", () => {
     const listener = jest.fn();
 
     store.subscribe("currentReview", listener);
-    store.setCurrentReview(reviews[1]!);
+    store.setCurrentReview(mockReview2);
 
-    expect(listener).toHaveBeenCalledWith(reviews[1]);
+    expect(listener).toHaveBeenCalledWith(mockReview2);
   });
 });
