@@ -1,14 +1,14 @@
-import { ReviewState } from "@src/entities/states";
-import { Review } from "@src/entities/app";
+import type { ReviewState } from "@/types/states";
+import type { Review } from "@/types/app";
 
-import { Store } from "@src/core/store";
+import { Store } from "@/core/store";
 
-import reviews from "@src/constants/reviews";
+import reviews from "@/constants/reviews";
 
 export class ReviewStore extends Store<ReviewState> {
-  constructor(initialState: ReviewState) {
-    super(initialState);
-  }
+  // constructor(initialState: ReviewState) {
+  //   super(initialState);
+  // }
 
   public setCurrentReview(review: Review): void {
     this.setState({ currentReview: review });
@@ -21,5 +21,5 @@ export class ReviewStore extends Store<ReviewState> {
 
 export const reviewStore = new ReviewStore({
   reviews: reviews,
-  currentReview: reviews[0],
+  currentReview: reviews[0]!,
 });

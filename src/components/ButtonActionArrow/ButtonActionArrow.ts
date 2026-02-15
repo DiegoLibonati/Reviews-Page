@@ -1,4 +1,5 @@
-import { ButtonActionArrowProps } from "@src/entities/props";
+import type { ButtonActionArrowProps } from "@/types/props";
+import type { ButtonActionArrowComponent } from "@/types/components";
 
 export const ButtonActionArrow = ({
   id,
@@ -6,8 +7,8 @@ export const ButtonActionArrow = ({
   children,
   className,
   onClick,
-}: ButtonActionArrowProps): HTMLButtonElement => {
-  const button = document.createElement("button");
+}: ButtonActionArrowProps): ButtonActionArrowComponent => {
+  const button = document.createElement("button") as ButtonActionArrowComponent;
 
   button.className = `flex items-center justify-center cursor-pointer text-white ${
     className ?? ""
@@ -17,6 +18,10 @@ export const ButtonActionArrow = ({
   button.innerHTML = children ?? "";
 
   button.addEventListener("click", onClick);
+
+  button.cleanup = (): void => {
+    button.removeEventListener("click", onClick);
+  };
 
   return button;
 };

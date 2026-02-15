@@ -1,4 +1,5 @@
-import { ButtonActionProps } from "@src/entities/props";
+import type { ButtonActionProps } from "@/types/props";
+import type { ButtonActionComponent } from "@/types/components";
 
 export const ButtonAction = ({
   id,
@@ -6,8 +7,8 @@ export const ButtonAction = ({
   children,
   className,
   onClick,
-}: ButtonActionProps): HTMLButtonElement => {
-  const button = document.createElement("button");
+}: ButtonActionProps): ButtonActionComponent => {
+  const button = document.createElement("button") as ButtonActionComponent;
 
   button.className = `text-white border-2 rounded-md p-1 ${className ?? ""}`;
   button.id = id;
@@ -15,6 +16,10 @@ export const ButtonAction = ({
   button.innerHTML = children ?? "";
 
   button.addEventListener("click", onClick);
+
+  button.cleanup = (): void => {
+    button.removeEventListener("click", onClick);
+  };
 
   return button;
 };

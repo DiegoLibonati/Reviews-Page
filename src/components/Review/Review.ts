@@ -1,40 +1,43 @@
-import { ReviewProps } from "@src/entities/props";
+import type { ReviewProps } from "@/types/props";
+import type { ReviewComponent } from "@/types/components";
 
-import { ButtonAction } from "@src/components/ButtonAction/ButtonAction";
-import { ButtonActionArrow } from "@src/components/ButtonActionArrow/ButtonActionArrow";
+import { ButtonAction } from "@/components/ButtonAction/ButtonAction";
+import { ButtonActionArrow } from "@/components/ButtonActionArrow/ButtonActionArrow";
 
-import { reviewStore } from "@src/stores/reviewStore";
+import { reviewStore } from "@/stores/reviewStore";
 
-const handleNextReview = () => {
+const handleNextReview = (): void => {
   const { reviews, currentReview } = reviewStore.getState();
 
   const indexOfCurrentReview = reviews.indexOf(currentReview);
 
   if (indexOfCurrentReview >= reviews.length - 1) {
-    return reviewStore.setCurrentReview(reviews[0]);
+    reviewStore.setCurrentReview(reviews[0]!);
+    return;
   }
 
-  return reviewStore.setCurrentReview(reviews[indexOfCurrentReview + 1]);
+  reviewStore.setCurrentReview(reviews[indexOfCurrentReview + 1]!);
 };
 
-const handlePrevReview = () => {
+const handlePrevReview = (): void => {
   const { reviews, currentReview } = reviewStore.getState();
 
   const indexOfCurrentReview = reviews.indexOf(currentReview);
 
   if (indexOfCurrentReview <= 0) {
-    return reviewStore.setCurrentReview(reviews[reviews.length - 1]);
+    reviewStore.setCurrentReview(reviews[reviews.length - 1]!);
+    return;
   }
 
-  return reviewStore.setCurrentReview(reviews[indexOfCurrentReview - 1]);
+  reviewStore.setCurrentReview(reviews[indexOfCurrentReview - 1]!);
 };
 
-const handleSetRandomReview = () => {
+const handleSetRandomReview = (): void => {
   const { reviews } = reviewStore.getState();
 
   const randomPosition = Math.floor(Math.random() * reviews.length);
 
-  reviewStore.setCurrentReview(reviews[randomPosition]);
+  reviewStore.setCurrentReview(reviews[randomPosition]!);
 };
 
 export const Review = ({
@@ -42,8 +45,8 @@ export const Review = ({
   name,
   description,
   position,
-}: ReviewProps): HTMLDivElement => {
-  const divRoot = document.createElement("div");
+}: ReviewProps): ReviewComponent => {
+  const divRoot = document.createElement("div") as ReviewComponent;
   divRoot.className =
     "flex flex-col w-full items-center h-[95%] bg-primary p-6 shadow-sm md:flex-row md:h-[50%] md:w-[95%] md:p-8 lg:h-[65%] lg:w-[85%] xl:w-[70%] 2xl:w-[65%] review";
 
@@ -116,8 +119,13 @@ export const Review = ({
   });
 
   reviewActions?.append(buttonSurpriseMe);
-
   reviewActionArrows?.append(buttonArrowPrev, buttonArrowNext);
+
+  divRoot.cleanup = (): void => {
+    buttonArrowPrev.cleanup?.();
+    buttonArrowNext.cleanup?.();
+    buttonSurpriseMe.cleanup?.();
+  };
 
   return divRoot;
 };

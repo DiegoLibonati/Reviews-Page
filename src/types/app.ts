@@ -1,7 +1,7 @@
-export type Review = {
+export interface Review {
   id: string;
   imgSrc: string;
   name: string;
   position: string;
   description: string;
-};
+}

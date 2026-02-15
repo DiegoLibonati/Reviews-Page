@@ -1,4 +1,4 @@
-import { Review } from "@src/entities/app";
+import type { Review } from "@/types/app";
 
 const reviews: Review[] = [
   {

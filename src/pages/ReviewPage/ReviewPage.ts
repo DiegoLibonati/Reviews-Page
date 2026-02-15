@@ -1,9 +1,11 @@
-import { Review } from "@src/components/Review/Review";
+import type { Page } from "@/types/pages";
 
-import { reviewStore } from "@src/stores/reviewStore";
+import { Review } from "@/components/Review/Review";
 
-export const ReviewPage = (): HTMLElement => {
-  const main = document.createElement("main");
+import { reviewStore } from "@/stores/reviewStore";
+
+export const ReviewPage = (): Page => {
+  const main = document.createElement("main") as Page;
   main.className = "w-screen h-screen bg-background";
 
   main.innerHTML = `
@@ -11,10 +13,17 @@ export const ReviewPage = (): HTMLElement => {
     </section>
   `;
 
-  const renderReview = () => {
+  let currentReviewComponent: ReturnType<typeof Review> | null = null;
+
+  const renderReview = (): void => {
     const { currentReview } = reviewStore.getState();
 
     const reviewWrapper = main.querySelector<HTMLElement>(".review-wrapper");
+
+    if (currentReviewComponent) {
+      currentReviewComponent.cleanup?.();
+    }
+
     reviewWrapper?.replaceChildren();
 
     const review = Review({
@@ -24,12 +33,23 @@ export const ReviewPage = (): HTMLElement => {
       position: currentReview.position,
     });
 
+    currentReviewComponent = review;
+
     reviewWrapper?.append(review);
   };
 
   renderReview();
 
-  reviewStore.subscribe("currentReview", renderReview);
+  const unsubscribe = reviewStore.subscribe("currentReview", renderReview);
+
+  main.cleanup = (): void => {
+    unsubscribe();
+
+    if (currentReviewComponent) {
+      currentReviewComponent.cleanup?.();
+      currentReviewComponent = null;
+    }
+  };
 
   return main;
 };
