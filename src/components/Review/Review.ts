@@ -99,21 +99,21 @@ export const Review = ({
 
   const buttonArrowPrev = ButtonActionArrow({
     id: "btnprev",
-    ariaLabel: "btn prev review",
+    ariaLabel: "Previous review",
     onClick: handlePrevReview,
     children: `<i class="material-icons text-3xl">chevron_left</i>`,
   });
 
   const buttonArrowNext = ButtonActionArrow({
     id: "btnnext",
-    ariaLabel: "btn next review",
+    ariaLabel: "Next review",
     onClick: handleNextReview,
     children: `<i class="material-icons text-3xl">chevron_right</i>`,
   });
 
   const buttonSurpriseMe = ButtonAction({
     id: "btnrandom",
-    ariaLabel: "btn random review",
+    ariaLabel: "Surprise me - show random review",
     children: "Surprise Me",
     onClick: handleSetRandomReview,
   });

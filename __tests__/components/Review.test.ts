@@ -82,13 +82,13 @@ describe("Review Component", () => {
     renderComponent(defaultProps);
 
     expect(
-      screen.getByRole("button", { name: "btn prev review" })
+      screen.getByRole("button", { name: "Previous review" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "btn next review" })
+      screen.getByRole("button", { name: "Next review" })
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("button", { name: "btn random review" })
+      screen.getByRole("button", { name: "Surprise me - show random review" })
     ).toBeInTheDocument();
   });
 
@@ -96,7 +96,7 @@ describe("Review Component", () => {
     const user = userEvent.setup();
     renderComponent(defaultProps);
 
-    const nextButton = screen.getByRole("button", { name: "btn next review" });
+    const nextButton = screen.getByRole("button", { name: "Next review" });
     await user.click(nextButton);
 
     const currentReview = reviewStore.get("currentReview");
@@ -108,7 +108,7 @@ describe("Review Component", () => {
     reviewStore.setCurrentReview(mockReview2);
     renderComponent(defaultProps);
 
-    const prevButton = screen.getByRole("button", { name: "btn prev review" });
+    const prevButton = screen.getByRole("button", { name: "Previous review" });
     await user.click(prevButton);
 
     const currentReview = reviewStore.get("currentReview");
@@ -120,7 +120,7 @@ describe("Review Component", () => {
     renderComponent(defaultProps);
 
     const randomButton = screen.getByRole("button", {
-      name: "btn random review",
+      name: "Surprise me - show random review",
     });
     await user.click(randomButton);
 

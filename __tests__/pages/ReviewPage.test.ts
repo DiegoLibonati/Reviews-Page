@@ -50,7 +50,7 @@ describe("ReviewPage", () => {
     const user = userEvent.setup();
     renderPage();
 
-    const nextButton = screen.getByRole("button", { name: "btn next review" });
+    const nextButton = screen.getByRole("button", { name: "Next review" });
     await user.click(nextButton);
 
     const currentReview = reviewStore.get("currentReview");
@@ -62,7 +62,7 @@ describe("ReviewPage", () => {
     reviewStore.setCurrentReview(mockReview2);
     renderPage();
 
-    const prevButton = screen.getByRole("button", { name: "btn prev review" });
+    const prevButton = screen.getByRole("button", { name: "Previous review" });
     await user.click(prevButton);
 
     expect(screen.getByText(mockReview.name)).toBeInTheDocument();
