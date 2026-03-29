@@ -1,10 +1,10 @@
 import type { Page } from "@/types/pages";
 
-import { Review } from "@/components/Review/Review";
+import Review from "@/components/Review/Review";
 
 import { reviewStore } from "@/stores/reviewStore";
 
-export const ReviewPage = (): Page => {
+const ReviewPage = (): Page => {
   const main = document.createElement("main") as Page;
   main.className = "w-screen h-screen bg-background";
 
@@ -53,3 +53,5 @@ export const ReviewPage = (): Page => {
 
   return main;
 };
+
+export default ReviewPage;

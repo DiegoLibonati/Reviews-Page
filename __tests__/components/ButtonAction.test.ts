@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import type { ButtonActionProps } from "@/types/props";
 import type { ButtonActionComponent } from "@/types/components";
 
-import { ButtonAction } from "@/components/ButtonAction/ButtonAction";
+import ButtonAction from "@/components/ButtonAction/ButtonAction";
 
 const renderComponent = (props: ButtonActionProps): ButtonActionComponent => {
   const container = ButtonAction(props);

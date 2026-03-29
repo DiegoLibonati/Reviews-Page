@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import type { ReviewProps } from "@/types/props";
 import type { ReviewComponent } from "@/types/components";
 
-import { Review } from "@/components/Review/Review";
+import Review from "@/components/Review/Review";
 
 import { reviewStore } from "@/stores/reviewStore";
 

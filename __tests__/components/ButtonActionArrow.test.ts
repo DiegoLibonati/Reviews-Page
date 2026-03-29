@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import type { ButtonActionArrowProps } from "@/types/props";
 import type { ButtonActionArrowComponent } from "@/types/components";
 
-import { ButtonActionArrow } from "@/components/ButtonActionArrow/ButtonActionArrow";
+import ButtonActionArrow from "@/components/ButtonActionArrow/ButtonActionArrow";
 
 const renderComponent = (
   props: ButtonActionArrowProps

@@ -1,7 +1,7 @@
 import type { ButtonActionArrowProps } from "@/types/props";
 import type { ButtonActionArrowComponent } from "@/types/components";
 
-export const ButtonActionArrow = ({
+const ButtonActionArrow = ({
   id,
   ariaLabel,
   children,
@@ -25,3 +25,5 @@ export const ButtonActionArrow = ({
 
   return button;
 };
+
+export default ButtonActionArrow;

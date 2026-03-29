@@ -1,8 +1,8 @@
 import type { ReviewProps } from "@/types/props";
 import type { ReviewComponent } from "@/types/components";
 
-import { ButtonAction } from "@/components/ButtonAction/ButtonAction";
-import { ButtonActionArrow } from "@/components/ButtonActionArrow/ButtonActionArrow";
+import ButtonAction from "@/components/ButtonAction/ButtonAction";
+import ButtonActionArrow from "@/components/ButtonActionArrow/ButtonActionArrow";
 
 import { reviewStore } from "@/stores/reviewStore";
 
@@ -40,7 +40,7 @@ const handleSetRandomReview = (): void => {
   reviewStore.setCurrentReview(reviews[randomPosition]!);
 };
 
-export const Review = ({
+const Review = ({
   imgSrc,
   name,
   description,
@@ -129,3 +129,5 @@ export const Review = ({
 
   return divRoot;
 };
+
+export default Review;
