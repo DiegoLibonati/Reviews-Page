@@ -32,11 +32,11 @@ describe("ReviewStore", () => {
   });
 
   it("should notify listeners when current review changes", () => {
-    const listener = jest.fn();
+    const mockListener = jest.fn();
 
-    store.subscribe("currentReview", listener);
+    store.subscribe("currentReview", mockListener);
     store.setCurrentReview(mockReview2);
 
-    expect(listener).toHaveBeenCalledWith(mockReview2);
+    expect(mockListener).toHaveBeenCalledWith(mockReview2);
   });
 });
