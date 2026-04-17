@@ -1,7 +1,7 @@
 {
-  "name": "Reviews",
-  "short_name": "Reviews",
-  "description": "I made a web page that allows you to see different reviews, this web application allowed me to learn how to make this kind of reviews/slides with next, prev and with a `Surprise Me` button that basically looks for a random review to show. In this case you see an image, the name, the role and a brief description.",
+  "name": "Glimpsed",
+  "short_name": "Glimpsed",
+  "description": "Glimpsed is a client testimonials viewer built entirely with vanilla TypeScript — no UI frameworks, no runtime dependencies. It presents a curated list of reviews in a clean card layout, where each entry features a reviewer photo, full name, professional role, and a personal testimonial.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

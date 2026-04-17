@@ -4,7 +4,7 @@ import Review from "@/components/Review/Review";
 
 import { reviewStore } from "@/stores/reviewStore";
 
-const ReviewPage = (): Page => {
+const GlimpsedPage = (): Page => {
   const main = document.createElement("main") as Page;
   main.className = "w-screen h-screen bg-background";
 
@@ -54,4 +54,4 @@ const ReviewPage = (): Page => {
   return main;
 };
 
-export default ReviewPage;
+export default GlimpsedPage;

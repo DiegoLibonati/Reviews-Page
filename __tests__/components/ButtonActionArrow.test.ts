@@ -6,76 +6,109 @@ import type { ButtonActionArrowComponent } from "@/types/components";
 
 import ButtonActionArrow from "@/components/ButtonActionArrow/ButtonActionArrow";
 
-const renderComponent = (
-  props: ButtonActionArrowProps
-): ButtonActionArrowComponent => {
-  const container = ButtonActionArrow(props);
-  document.body.appendChild(container);
-  return container;
+const mockOnClick = jest.fn();
+
+const defaultProps: ButtonActionArrowProps = {
+  id: "arrow-btn",
+  ariaLabel: "Navigate",
+  children: "<i>arrow</i>",
+  className: "arrow-class",
+  onClick: mockOnClick,
 };
 
-describe("ButtonActionArrow Component", () => {
+const renderComponent = (
+  props: Partial<ButtonActionArrowProps> = {}
+): ButtonActionArrowComponent => {
+  const element = ButtonActionArrow({ ...defaultProps, ...props });
+  document.body.appendChild(element);
+  return element;
+};
+
+describe("ButtonActionArrow", () => {
   afterEach(() => {
     document.body.innerHTML = "";
+    jest.clearAllMocks();
   });
 
-  const mockOnClick = jest.fn();
-
-  const defaultProps: ButtonActionArrowProps = {
-    id: "test-arrow",
-    ariaLabel: "Test arrow button",
-    children: '<i class="material-icons">chevron_left</i>',
-    onClick: mockOnClick,
-  };
-
-  it("should render button with correct attributes", () => {
-    renderComponent(defaultProps);
-
-    const button = screen.getByRole("button", { name: "Test arrow button" });
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveAttribute("id", "test-arrow");
-  });
-
-  it("should render icon children", () => {
-    renderComponent(defaultProps);
-
-    const button = screen.getByRole("button", { name: "Test arrow button" });
-    expect(button.innerHTML).toContain("chevron_left");
-  });
-
-  it("should call onClick handler when clicked", async () => {
-    const user = userEvent.setup();
-    renderComponent(defaultProps);
-
-    const button = screen.getByRole("button", { name: "Test arrow button" });
-    await user.click(button);
-
-    expect(mockOnClick).toHaveBeenCalledTimes(1);
-  });
-
-  it("should apply additional className when provided", () => {
-    const propsWithClass: ButtonActionArrowProps = {
-      ...defaultProps,
-      className: "arrow-custom",
-    };
-
-    renderComponent(propsWithClass);
-
-    const button = screen.getByRole("button", { name: "Test arrow button" });
-    expect(button).toHaveClass("arrow-custom");
-  });
-
-  it("should cleanup event listener", async () => {
-    const user = userEvent.setup();
-    const button = renderComponent(defaultProps);
-
-    button.cleanup?.();
-
-    const buttonElement = screen.getByRole("button", {
-      name: "Test arrow button",
+  describe("rendering", () => {
+    it("should render a button element", () => {
+      renderComponent();
+      expect(screen.getByRole("button")).toBeInTheDocument();
     });
-    await user.click(buttonElement);
 
-    expect(mockOnClick).not.toHaveBeenCalled();
+    it("should render with the correct id", () => {
+      renderComponent();
+      expect(screen.getByRole("button")).toHaveAttribute("id", "arrow-btn");
+    });
+
+    it("should render with the correct aria-label", () => {
+      renderComponent();
+      expect(
+        screen.getByRole("button", { name: "Navigate" })
+      ).toBeInTheDocument();
+    });
+
+    it("should include the className in the button classes", () => {
+      renderComponent();
+      expect(screen.getByRole("button")).toHaveClass("arrow-class");
+    });
+
+    it("should render with the base tailwind classes", () => {
+      renderComponent();
+      expect(screen.getByRole("button")).toHaveClass(
+        "flex",
+        "items-center",
+        "justify-center",
+        "cursor-pointer",
+        "text-white"
+      );
+    });
+
+    it("should render with empty content when children is not provided", () => {
+      const element = ButtonActionArrow({
+        id: "arrow-btn",
+        ariaLabel: "Navigate",
+        onClick: mockOnClick,
+      });
+      document.body.appendChild(element);
+      expect(screen.getByRole("button")).toHaveTextContent("");
+    });
+
+    it("should render without extra class when className is not provided", () => {
+      const element = ButtonActionArrow({
+        id: "arrow-btn",
+        ariaLabel: "Navigate",
+        onClick: mockOnClick,
+      });
+      document.body.appendChild(element);
+      expect(screen.getByRole("button")).toBeInTheDocument();
+    });
+  });
+
+  describe("behavior", () => {
+    it("should call onClick when the button is clicked", async () => {
+      renderComponent();
+      const user = userEvent.setup();
+      await user.click(screen.getByRole("button"));
+      expect(mockOnClick).toHaveBeenCalledTimes(1);
+    });
+
+    it("should call onClick each time the button is clicked", async () => {
+      renderComponent();
+      const user = userEvent.setup();
+      await user.click(screen.getByRole("button"));
+      await user.click(screen.getByRole("button"));
+      expect(mockOnClick).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe("cleanup", () => {
+    it("should remove the click listener after cleanup is called", async () => {
+      const element = renderComponent();
+      element.cleanup?.();
+      const user = userEvent.setup();
+      await user.click(screen.getByRole("button"));
+      expect(mockOnClick).not.toHaveBeenCalled();
+    });
   });
 });

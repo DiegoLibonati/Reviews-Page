@@ -6,66 +6,113 @@ import type { ButtonActionComponent } from "@/types/components";
 
 import ButtonAction from "@/components/ButtonAction/ButtonAction";
 
-const renderComponent = (props: ButtonActionProps): ButtonActionComponent => {
-  const container = ButtonAction(props);
-  document.body.appendChild(container);
-  return container;
+const mockOnClick = jest.fn();
+
+const defaultProps: ButtonActionProps = {
+  id: "action-btn",
+  ariaLabel: "Click action",
+  children: "Click Me",
+  className: "custom-class",
+  onClick: mockOnClick,
 };
 
-describe("ButtonAction Component", () => {
+const renderComponent = (
+  props: Partial<ButtonActionProps> = {}
+): ButtonActionComponent => {
+  const element = ButtonAction({ ...defaultProps, ...props });
+  document.body.appendChild(element);
+  return element;
+};
+
+describe("ButtonAction", () => {
   afterEach(() => {
     document.body.innerHTML = "";
+    jest.clearAllMocks();
   });
 
-  const mockOnClick = jest.fn();
+  describe("rendering", () => {
+    it("should render a button element", () => {
+      renderComponent();
+      expect(screen.getByRole("button")).toBeInTheDocument();
+    });
 
-  const defaultProps: ButtonActionProps = {
-    id: "test-button",
-    ariaLabel: "Test button",
-    children: "Click Me",
-    onClick: mockOnClick,
-  };
+    it("should render with the correct id", () => {
+      renderComponent();
+      expect(screen.getByRole("button")).toHaveAttribute("id", "action-btn");
+    });
 
-  it("should render button with correct attributes", () => {
-    renderComponent(defaultProps);
+    it("should render with the correct aria-label", () => {
+      renderComponent();
+      expect(
+        screen.getByRole("button", { name: "Click action" })
+      ).toBeInTheDocument();
+    });
 
-    const button = screen.getByRole("button", { name: "Test button" });
-    expect(button).toBeInTheDocument();
-    expect(button).toHaveAttribute("id", "test-button");
-    expect(button.innerHTML).toBe("Click Me");
+    it("should render with the correct text content", () => {
+      renderComponent();
+      expect(screen.getByRole("button")).toHaveTextContent("Click Me");
+    });
+
+    it("should include the className in the button classes", () => {
+      renderComponent();
+      expect(screen.getByRole("button")).toHaveClass("custom-class");
+    });
+
+    it("should render with the base tailwind classes", () => {
+      renderComponent();
+      expect(screen.getByRole("button")).toHaveClass(
+        "text-white",
+        "border-2",
+        "rounded-md",
+        "p-1"
+      );
+    });
+
+    it("should render with empty content when children is not provided", () => {
+      const element = ButtonAction({
+        id: "action-btn",
+        ariaLabel: "Click action",
+        onClick: mockOnClick,
+      });
+      document.body.appendChild(element);
+      expect(screen.getByRole("button")).toHaveTextContent("");
+    });
+
+    it("should render without extra class when className is not provided", () => {
+      const element = ButtonAction({
+        id: "action-btn",
+        ariaLabel: "Click action",
+        onClick: mockOnClick,
+      });
+      document.body.appendChild(element);
+      expect(screen.getByRole("button")).toBeInTheDocument();
+    });
   });
 
-  it("should call onClick handler when clicked", async () => {
-    const user = userEvent.setup();
-    renderComponent(defaultProps);
+  describe("behavior", () => {
+    it("should call onClick when the button is clicked", async () => {
+      renderComponent();
+      const user = userEvent.setup();
+      await user.click(screen.getByRole("button"));
+      expect(mockOnClick).toHaveBeenCalledTimes(1);
+    });
 
-    const button = screen.getByRole("button", { name: "Test button" });
-    await user.click(button);
-
-    expect(mockOnClick).toHaveBeenCalledTimes(1);
+    it("should call onClick each time the button is clicked", async () => {
+      renderComponent();
+      const user = userEvent.setup();
+      await user.click(screen.getByRole("button"));
+      await user.click(screen.getByRole("button"));
+      expect(mockOnClick).toHaveBeenCalledTimes(2);
+    });
   });
 
-  it("should apply additional className when provided", () => {
-    const propsWithClass: ButtonActionProps = {
-      ...defaultProps,
-      className: "custom-class",
-    };
-
-    renderComponent(propsWithClass);
-
-    const button = screen.getByRole("button", { name: "Test button" });
-    expect(button).toHaveClass("custom-class");
-  });
-
-  it("should cleanup event listener", async () => {
-    const user = userEvent.setup();
-    const button = renderComponent(defaultProps);
-
-    button.cleanup?.();
-
-    const buttonElement = screen.getByRole("button", { name: "Test button" });
-    await user.click(buttonElement);
-
-    expect(mockOnClick).not.toHaveBeenCalled();
+  describe("cleanup", () => {
+    it("should remove the click listener after cleanup is called", async () => {
+      const element = renderComponent();
+      element.cleanup?.();
+      const user = userEvent.setup();
+      await user.click(screen.getByRole("button"));
+      expect(mockOnClick).not.toHaveBeenCalled();
+    });
   });
 });

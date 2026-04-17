@@ -1,4 +1,4 @@
-# Reviews Page
+# Glimpsed
 
 ## Educational Purpose
 
@@ -17,7 +17,15 @@ The application will open automatically at `http://localhost:3000`
 
 ## Description
 
-I made a web page that allows you to see different reviews, this web application allowed me to learn how to make this kind of reviews/slides with next, prev and with a `Surprise Me` button that basically looks for a random review to show. In this case you see an image, the name, the role and a brief description.
+**Glimpsed** is a client testimonials viewer built entirely with vanilla TypeScript — no UI frameworks, no runtime dependencies. It presents a curated list of reviews in a clean card layout, where each entry features a reviewer photo, full name, professional role, and a personal testimonial.
+
+Users can navigate through the reviews in three ways: stepping forward with the **Next** button, stepping backward with the **Previous** button, or jumping to a random entry with the **Surprise Me** button. Navigation wraps around seamlessly — going past the last review cycles back to the first, and going before the first jumps to the last.
+
+Under the hood, state is managed through a custom generic `Store` class that implements a subscription-based observer pattern. Components subscribe to specific state keys and receive updates only when those keys change, keeping the UI in sync without any reactivity framework. The `ReviewStore` extends this base class and holds the full reviews array along with the currently displayed review.
+
+The UI is built with reusable component functions that return DOM elements directly, follow a strict props interface, and expose a `cleanup()` method to remove event listeners and prevent memory leaks. Styling is handled with Tailwind CSS and is fully responsive, adapting the layout from a stacked mobile view to a side-by-side desktop card.
+
+The project is covered by a comprehensive test suite using Jest, ts-jest, and Testing Library, with coverage thresholds enforced at 70% across branches, functions, lines, and statements. Code quality is enforced through ESLint and Prettier, with pre-commit hooks via Husky and lint-staged running automatically on every commit.
 
 ## Technologies used
 
@@ -63,11 +71,7 @@ No production dependencies - Pure Vanilla TypeScript
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/Reviews-Page`](https://www.diegolibonati.com.ar/#/project/Reviews-Page)
-
-## Video
-
-https://github.com/DiegoLibonati/Reviews-Page/assets/99032604/6fd3ffaa-1835-4042-8b37-6798b734c19c
+[`https://www.diegolibonati.com.ar/#/project/glimpsed`](https://www.diegolibonati.com.ar/#/project/glimpsed)
 
 ## Testing
 
