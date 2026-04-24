@@ -1,7 +1,7 @@
 {
   "name": "Glimpsed",
   "short_name": "Glimpsed",
-  "description": "Glimpsed is a client testimonials viewer built entirely with vanilla TypeScript — no UI frameworks, no runtime dependencies. It presents a curated list of reviews in a clean card layout, where each entry features a reviewer photo, full name, professional role, and a personal testimonial.",
+  "description": "Glimpsed is a client testimonials viewer built entirely with vanilla TypeScript — no UI frameworks, no runtime dependencies.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
