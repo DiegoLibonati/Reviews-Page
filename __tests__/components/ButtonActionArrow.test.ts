@@ -63,24 +63,16 @@ describe("ButtonActionArrow", () => {
         "text-white"
       );
     });
+  });
 
+  describe("edge cases", () => {
     it("should render with empty content when children is not provided", () => {
-      const element = ButtonActionArrow({
-        id: "arrow-btn",
-        ariaLabel: "Navigate",
-        onClick: mockOnClick,
-      });
-      document.body.appendChild(element);
+      renderComponent({ children: undefined });
       expect(screen.getByRole("button")).toHaveTextContent("");
     });
 
     it("should render without extra class when className is not provided", () => {
-      const element = ButtonActionArrow({
-        id: "arrow-btn",
-        ariaLabel: "Navigate",
-        onClick: mockOnClick,
-      });
-      document.body.appendChild(element);
+      renderComponent({ className: undefined });
       expect(screen.getByRole("button")).toBeInTheDocument();
     });
   });

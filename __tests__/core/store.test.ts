@@ -5,11 +5,7 @@ interface TestState extends Record<string, unknown> {
   name: string;
 }
 
-class TestStore extends Store<TestState> {
-  // constructor(initialState: TestState) {
-  //   super(initialState);
-  // }
-}
+class TestStore extends Store<TestState> {}
 
 const mockInitialState: TestState = { count: 0, name: "test" };
 

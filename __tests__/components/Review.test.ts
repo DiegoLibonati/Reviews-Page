@@ -58,8 +58,7 @@ describe("Review", () => {
 
     it("should render the reviewer image with the correct src", () => {
       renderComponent();
-      const img = document.querySelector<HTMLImageElement>("#image");
-      expect(img).toHaveAttribute("src", mockReview.imgSrc);
+      expect(screen.getByRole("img")).toHaveAttribute("src", mockReview.imgSrc);
     });
 
     it("should render the previous review button", () => {

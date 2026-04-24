@@ -35,7 +35,7 @@ describe("GlimpsedPage", () => {
   describe("rendering", () => {
     it("should render a main element", () => {
       page = renderPage();
-      expect(document.querySelector<HTMLElement>("main")).toBeInTheDocument();
+      expect(screen.getByRole("main")).toBeInTheDocument();
     });
 
     it("should render the review wrapper section", () => {

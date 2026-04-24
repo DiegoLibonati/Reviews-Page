@@ -67,24 +67,16 @@ describe("ButtonAction", () => {
         "p-1"
       );
     });
+  });
 
+  describe("edge cases", () => {
     it("should render with empty content when children is not provided", () => {
-      const element = ButtonAction({
-        id: "action-btn",
-        ariaLabel: "Click action",
-        onClick: mockOnClick,
-      });
-      document.body.appendChild(element);
+      renderComponent({ children: undefined });
       expect(screen.getByRole("button")).toHaveTextContent("");
     });
 
     it("should render without extra class when className is not provided", () => {
-      const element = ButtonAction({
-        id: "action-btn",
-        ariaLabel: "Click action",
-        onClick: mockOnClick,
-      });
-      document.body.appendChild(element);
+      renderComponent({ className: undefined });
       expect(screen.getByRole("button")).toBeInTheDocument();
     });
   });
