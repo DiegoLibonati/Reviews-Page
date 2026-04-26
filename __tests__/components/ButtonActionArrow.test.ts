@@ -67,12 +67,12 @@ describe("ButtonActionArrow", () => {
 
   describe("edge cases", () => {
     it("should render with empty content when children is not provided", () => {
-      renderComponent({ children: undefined });
+      renderComponent({ children: undefined! });
       expect(screen.getByRole("button")).toHaveTextContent("");
     });
 
     it("should render without extra class when className is not provided", () => {
-      renderComponent({ className: undefined });
+      renderComponent({ className: undefined! });
       expect(screen.getByRole("button")).toBeInTheDocument();
     });
   });
