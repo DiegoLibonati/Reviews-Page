@@ -6,14 +6,7 @@ This project was created primarily for **educational and learning purposes**.
 While it is well-structured and could technically be used in production, it is **not intended for commercialization**.  
 The main goal is to explore and demonstrate best practices, patterns, and technologies in software development.
 
-## Getting Started
-
-1. Clone the repository
-2. Navigate to the project folder
-3. Execute: `npm install`
-4. Execute: `npm run dev`
-
-The application will open automatically at `http://localhost:3000`
+With that scope in mind, the sections below describe what the app actually does and how it is built.
 
 ## Description
 
@@ -36,6 +29,8 @@ The project is covered by a comprehensive test suite using Jest, ts-jest, and Te
 5. Vite
 
 ## Libraries used
+
+The stack is intentionally minimal: there are no production dependencies, and every package below is a development tool used for building, testing, linting, or styling.
 
 #### Dependencies
 
@@ -70,11 +65,20 @@ No production dependencies - Pure Vanilla TypeScript
 "vite": "^7.1.5"
 ```
 
-## Portfolio Link
+## Getting Started
 
-[`https://www.diegolibonati.com.ar/#/project/glimpsed`](https://www.diegolibonati.com.ar/#/project/glimpsed)
+With the stack in mind, follow these steps to run the app locally:
+
+1. Clone the repository
+2. Navigate to the project folder
+3. Execute: `npm install`
+4. Execute: `npm run dev`
+
+The application will open automatically at `http://localhost:3000`.
 
 ## Testing
+
+Once the app runs locally, you can verify behavior with the test suite:
 
 1. Navigate to the project folder
 2. Execute: `npm test`
@@ -85,11 +89,9 @@ For coverage report:
 npm run test:coverage
 ```
 
-## Security
+## Security Audit
 
-### npm audit
-
-Check for vulnerabilities in dependencies:
+Beyond functional testing, check for known vulnerabilities in dependencies:
 
 ```bash
 npm audit
@@ -98,3 +100,7 @@ npm audit
 ## Known Issues
 
 None at the moment.
+
+## Portfolio Link
+
+[`https://www.diegolibonati.com.ar/#/project/glimpsed`](https://www.diegolibonati.com.ar/#/project/glimpsed)
