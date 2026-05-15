@@ -71,8 +71,9 @@ With the stack in mind, follow these steps to run the app locally:
 
 1. Clone the repository
 2. Navigate to the project folder
-3. Execute: `npm install`
-4. Execute: `npm run dev`
+3. Ensure Node.js ≥ 22 is active (run `nvm use` if you have nvm installed)
+4. Execute: `npm install`
+5. Execute: `npm run dev`
 
 The application will open automatically at `http://localhost:3000`.
 
