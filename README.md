@@ -90,6 +90,45 @@ For coverage report:
 npm run test:coverage
 ```
 
+## Continuous Integration
+
+The repository ships with a **GitHub Actions** pipeline defined in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs automatically on every `push` and `pull_request` targeting the `main` branch. The pipeline is purely a validation gate — it does not produce releases or publish artifacts.
+
+### Pipeline overview
+
+```
+                      ┌─── PR or push to main ───┐
+                      ▼                          ▼
+┌──────────────────────┐  ┌──────────────────┐  ┌──────────────────┐
+│   lint-and-audit     │─▶│     testing      │─▶│      build       │
+│  eslint · tsc --noEmit│  │   jest (jsdom)   │  │  tsc + vite build│
+└──────────────────────┘  └──────────────────┘  └──────────────────┘
+```
+
+Each job runs on `ubuntu-latest`, pins the Node.js version from `.nvmrc`, caches the npm store, and installs dependencies with `npm ci` before running its step.
+
+### Validation jobs (run on every PR and push)
+
+1. **`lint-and-audit`** — runs `npm run lint` (ESLint with the project's flat config) and `npm run type-check` (`tsc --noEmit`). Acts as the entry gate: if the code does not lint or type-check, the rest of the pipeline does not start.
+2. **`testing`** — depends on `lint-and-audit`. Runs `npm run test`, executing the full Jest suite under `jest-environment-jsdom` with the 70% coverage thresholds defined in `jest.config.js`.
+3. **`build`** — depends on `testing`. Runs `npm run build`, which type-checks the project and produces the Vite production bundle. This is a smoke test that the app compiles cleanly; the resulting `dist/` is not uploaded as an artifact.
+
+### Running the same checks locally
+
+```bash
+# lint-and-audit
+npm run lint
+npm run type-check
+
+# testing
+npm run test
+
+# build
+npm run build
+```
+
+> **Note:** the `lint-and-audit` job currently runs lint and type-check only. Dependency vulnerability scanning lives in the [Security Audit](#security-audit) section below and is not yet wired into CI.
+
 ## Security Audit
 
 Beyond functional testing, check for known vulnerabilities in dependencies:
